@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-
+import "./theme.css";
+import Script from "next/script";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { Inter,Noto_Nastaliq_Urdu } from "next/font/google";
+const nastaleeq = Noto_Nastaliq_Urdu({ subsets: ["latin"],
+  weight:['400','500'],
+ });
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -24,9 +32,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html dir="rtl" lang="ar" data-bs-theme="light">
+     <body className={nastaleeq.className}  >
+      <div className="wrapper">
+        <Header/>
+        <Navbar/>
         {children}
+        <Footer/>
+        </div>
+        <Script src="/assets/js/bootstrap.bundle.min.js" />
+        <Script src="/assets/js/hc-sticky.js" />
+        <Script src="/assets/js/flickity.pkgd.min.js" />
+        <Script src="/assets/js/lazyload.min.js" />
+        <Script src="/assets/js/SmoothScroll.js" />
+        <Script src="/assets/js/theme.js" />
       </body>
     </html>
   );
